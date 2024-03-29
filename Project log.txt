@@ -32,8 +32,10 @@ create local backend using Node.js
 	Test get all users functionality locally using browser (http://localhost:3001/api/users)
 		-> OK
 	commit
-		
-		
-		
+	add readme
 	
-add mongo database
+	todo: 
+	add support for other endpoints (add / modify / delete)
+
+todo: create frontend
+	
