@@ -29,7 +29,7 @@ create local backend using Node.js
 		implement get all users endpoint
 	create user.js (mongoose schema / model)
 	setup database in MongoDB Atlas
-	Test get all users functionality locally using browser (http://localhost:3001/api/users)
+	Test get all users functionality locally using browser (http://localhost:3001/api/users) (requires password to the database)
 		-> OK
 	commit
 	add readme
