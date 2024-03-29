@@ -18,6 +18,7 @@ create local backend using Node.js
 		install dotenv (so we can use env variables for MongoDB password and port)
 		install eslint for development (to help maintain clean readable code)
 	commit
+	
 	add project log
 	create utils
 		config.js (handles dotenv / environment variables)
@@ -32,10 +33,25 @@ create local backend using Node.js
 	Test get all users functionality locally using browser (http://localhost:3001/api/users) (requires password to the database)
 		-> OK
 	commit
-	add readme
 	
-	todo: 
-	add support for other endpoints (add / modify / delete)
+	add readme
+	update project log 
+	commit
+	
+	add REST Client requests
+	modify users.js
+		add support for POST / add user end point, test locally using REST client
+			-> OK
+		add support to GET single user with id, test locally using browser
+			-> OK		
+		add support for DELETE / remove user end point, test locally using REST client
+			-> OK
+		add support for PUT / modify user, test locally using REST client
+			-> OK
+	modify user.js
+		add required fields (name, username, email) and validation (email must have @)
+	commit
+		
 
 todo: create frontend
 	

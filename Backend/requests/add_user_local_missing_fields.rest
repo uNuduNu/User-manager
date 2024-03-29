@@ -1,0 +1,24 @@
+POST http://localhost:3001/api/users 
+Content-Type: application/json
+
+{
+   "name": "Kenny Powers",
+    "email": "Kenny.Powers@charros.com",
+    "address": {
+      "street": "Calle 5",
+      "suite": "Suite 198",
+      "city": "Gurabo",
+      "zipcode": "00778",
+      "geo": {
+        "lat": "18.255685",
+        "lng": "-65.978427"
+      }
+    },
+    "phone": "787-658-3804",
+    "website": "charros.net",
+    "company": {
+      "name": "Millennial rent-a-car",
+      "catchPhrase": "There’s no better feeling than winning",
+      "bs": "rent cars"
+    }
+}

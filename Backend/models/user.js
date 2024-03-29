@@ -1,9 +1,26 @@
 const mongoose = require('mongoose')
 
 const userSchema = mongoose.Schema({
-    name: String,
-    username: String,
-    email: String,
+    name: {
+        type: String,
+        minlength: 1,
+        required: true
+    },
+    username: {
+        type: String,
+        minlength: 1,
+        required: true
+    },
+    email: {
+        type: String,
+        minlength: 3,
+        required: true,
+        validate:{
+            // test that the email has @
+            validator: v => { return /.+@.+/.test(v)},
+            message: props => `${props.value} is not a valid email address`
+        }
+    },
     address: {
         street: String,
         suite: String,
