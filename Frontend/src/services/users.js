@@ -16,7 +16,7 @@ const addUser = (user) => {
     return promise.then(response => response.data)
 }
 
-const deleteUser = (id) => {
+const removeUser = (id) => {
     const promise = axios.delete(`${baseUrl}/${id}`)
     return promise.then(response => response.data)
 }
@@ -26,4 +26,4 @@ const modifyUser = (user) => {
     return promise.then(response => response.data)
 }
 
-export default { getAllUsers, getUser, addUser, deleteUser, modifyUser }
+export default { getAllUsers, getUser, addUser, removeUser, modifyUser }

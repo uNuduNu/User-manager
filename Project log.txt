@@ -58,14 +58,23 @@ frontend: react
 		install axios (makes communication with backend easier)
 	implement basic user list
 		create service/users.js, (handles communication with backend using axios)
-		create components/StatusMessage.jsx (shows message if user is added etc or if there is an error)
-		create components/UserList.jsx (shows a list of users (username: name) with modify & delete buttons)
-		
+		create Components/StatusMessage.jsx (shows message if user is added etc or if there is an error)
+		create Components/UserList.jsx (shows a list of users (username: name) with modify & delete buttons)
+	commit
+
+	implement user delete
+		add remove handler to delete button, call REST DELETE endpoint with user id
+	add controlbar
+		change Components/StatusMessage.jsx to Components/ControlBar.jsx, add button for adding new user and input for filtering user list
+	add some styling
+	implement user detail view
+		add Components/UserDetails.jsx 
+	changed userlist implementation, removed modify button, clicking the name will now open detail view which allows modification
+	implemented adding and modifying users
+	commit
+	
+	
 
 todo:	
-implement user delete
-implement user modify
-implement single user details
-implement add new user
-implement filter user	
-improve ui
+clean code (refactor react components?)
+make deployment build and host on render
