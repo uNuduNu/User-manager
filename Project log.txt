@@ -5,7 +5,7 @@ Use MongoDB / Node.js / React
 create repo
 create vs code workspace
 
-create local backend using Node.js
+backend: Node.js
 	setup backend
 		create package.json
 		create folder structure
@@ -52,6 +52,20 @@ create local backend using Node.js
 		add required fields (name, username, email) and validation (email must have @)
 	commit
 		
+frontend: react
+	setup frontend
+		create react app using Vite (has HMR which makes testing easier)
+		install axios (makes communication with backend easier)
+	implement basic user list
+		create service/users.js, (handles communication with backend using axios)
+		create components/StatusMessage.jsx (shows message if user is added etc or if there is an error)
+		create components/UserList.jsx (shows a list of users (username: name) with modify & delete buttons)
+		
 
-todo: create frontend
-	
+todo:	
+implement user delete
+implement user modify
+implement single user details
+implement add new user
+implement filter user	
+improve ui
