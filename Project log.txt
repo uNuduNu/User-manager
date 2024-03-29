@@ -1,0 +1,39 @@
+Github / User manager
+Use MongoDB / Node.js / React
+
+---
+create repo
+create vs code workspace
+
+create local backend using Node.js
+	setup backend
+		create package.json
+		create folder structure
+		create index.js
+		install express (web framework for Node.js)
+		install nodemon for development (restarts backend if the files in the directory change)
+		install cors (to allow same origin requests)
+		install morgan (http request logger)
+		install mongoose (makes it easier to use MongoDB)
+		install dotenv (so we can use env variables for MongoDB password and port)
+		install eslint for development (to help maintain clean readable code)
+	commit
+	add project log
+	create utils
+		config.js (handles dotenv / environment variables)
+		logger.js (logging)
+		middleware.js (error handling for express & mongoose requests)
+	update index.js (start the app using parameters from config and log the port using logger)
+	create app.js (express app)
+	create users.js (express endpoint router)
+		implement get all users endpoint
+	create user.js (mongoose schema / model)
+	setup database in MongoDB Atlas
+	Test get all users functionality locally using browser (http://localhost:3001/api/users)
+		-> OK
+	commit
+		
+		
+		
+	
+add mongo database
