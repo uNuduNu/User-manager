@@ -1,7 +1,6 @@
 # User manager practice project
 
 ## Requirements:
-
 ### Frontend:
 List users, adding new user and removing user.
 
@@ -9,9 +8,8 @@ List users, adding new user and removing user.
 REST interface for retrieving users and adding / modifying / deleting user.
 Authentication is not required.
 
-## Desing choices 
+## Design choices 
 MongoDB used for database, NodeJS for backend, React for frontend.
-
 
 ## REST API Endpoints
 Base url: https://user-manager-6rba.onrender.com/
