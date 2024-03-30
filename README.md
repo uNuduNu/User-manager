@@ -8,17 +8,17 @@ Hosted on render: https://user-manager-6rba.onrender.com/
 
 ## REST API Endpoints
 
-# GET /api/users
+### GET /api/users
 Retrieves all users.
 
-# GET api/users/id  
+### GET api/users/id  
 Retrieves user defined by id.
 
-# POST api/users
+### POST api/users
 Creates a new user using data included in request.
 
-# DELETE api/users/id
+### DELETE api/users/id
 Removes user defined by id.
 
-# PUT api/users/id  
+### PUT api/users/id  
 Replaces user defined by id using data included in request.
