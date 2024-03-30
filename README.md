@@ -1,12 +1,20 @@
 # User manager practice project
 
-Store user data in database, backend provides REST interface to data and loads frontend as main page.
+## Requirements:
 
+### Frontend:
+List users, adding new user and removing user.
+
+### Backend:
+REST interface for retrieving users and adding / modifying / deleting user.
+Authentication is not required.
+
+## Desing choices 
 MongoDB used for database, NodeJS for backend, React for frontend.
 
-Hosted on render: https://user-manager-6rba.onrender.com/
 
 ## REST API Endpoints
+Base url: https://user-manager-6rba.onrender.com/
 
 ### GET /api/users
 Retrieves all users.
