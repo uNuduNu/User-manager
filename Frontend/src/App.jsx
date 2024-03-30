@@ -75,7 +75,11 @@ function App() {
                 street: '',
                 suite: '',
                 city: '',
-                zipcode: ''
+                zipcode: '',
+                geo: {
+                    lat: '',
+                    lng: ''
+                }
             },
             company: {
                 name: '',
@@ -125,29 +129,42 @@ function App() {
         }
     }
 
+    // Go recursively through the object to find embedded object to update if necessary
+    const updateCurrentUser = (state, keys, value) => {
+        if (keys.length === 1) {
+            return { ...state, [keys[0]]: value }
+        }
+
+        const [currentKey, ...remainingKeys] = keys
+        return {
+            ...state,
+            [currentKey]: updateCurrentUser(state[currentKey] || {}, remainingKeys, value)
+        }
+    }
+
+    // Use single handler for all user detail inputs
     const userChangeHandler = (event) => {
-        let { name, value } = event.target
+        const { name, value } = event.target
 
         const nameClasses = name.split('.')
 
-        if (nameClasses.length > 2) {
-
-            showMessage('Failed to modify user', `user schema has changed: ${name}`)
-            return
+        // Do not update react state directly
+        const currentUserCopy = {
+            ...currentUser,
+            address: {
+                ...currentUser.address,
+                geo: {
+                    ...currentUser.address.geo
+                }
+            },
+            company : {
+                ...currentUser.company
+            }
         }
 
-        if (nameClasses.length === 2) {
-            const userObject = currentUser[nameClasses[0]]
-            userObject[nameClasses[1]] = value
+        console.log(currentUserCopy)
 
-            name = nameClasses[0]
-            value = userObject
-        }
-
-        setCurrentUser((prevCurrentUser) => ({
-            ...prevCurrentUser,
-            [name]: value,
-        }))
+        setCurrentUser(updateCurrentUser(currentUserCopy, nameClasses, value))
 
         setCurrentUserChanged(true)
     }

@@ -18,7 +18,7 @@ const userSchema = mongoose.Schema({
         validate:{
             // test that the email has @
             validator: v => { return /.+@.+/.test(v)},
-            message: props => `${props.value} is not a valid email address`
+            message: () => 'Email address is not valid'
         }
     },
     address: {
@@ -27,8 +27,22 @@ const userSchema = mongoose.Schema({
         city: String,
         zipcode: String,
         geo: {
-            lat: Number,
-            lng: Number
+            lat: {
+                type:Number,
+                required: false,
+                validate: {
+                    validator: v => { return !v || /^-?([1-8]?[1-9]|[1-9]0)\.{1}\d{1,6}|90\.0{1,6}$/.test(v) },
+                    message: () => 'Latitude is not a valid'
+                }
+            },
+            lng: {
+                type:Number,
+                required: false,
+                validate: {
+                    validator: v => { return !v || /^-?((1?[0-7]?[0-9]|[1-9]?[0-9])\.\d{1,6}|180\.0{1,6})$/.test(v) },
+                    message: () => 'Longitude is not valid'
+                }
+            }
         }
     },
     phone: String,

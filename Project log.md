@@ -84,5 +84,11 @@ create vs code workspace
 	test locally 
 	commit
 
+## Fixes and cleanup
+	add support for geo:lat, lng fields
+		add validation reg exps to mongoose schema
+		improve userChangeHandler
+	remove commented code
+
 ## Host
   Hosted on render

@@ -100,7 +100,9 @@ const UserDetails = ({ wide, user, userChanged, backHandler, saveHandler, userCh
         { label: 'Street', valueName: 'address.street', value: user.address.street },
         { label: 'Suite', valueName: 'address.suite', value: user.address.suite },
         { label: 'City', valueName: 'address.city', value: user.address.city },
-        { label: 'ZipCode', valueName: 'address.zipcode', value: user.address.zipcode }
+        { label: 'ZipCode', valueName: 'address.zipcode', value: user.address.zipcode },
+        { label: 'Latitude', valueName: 'address.geo.lat', value: user.address.geo.lat },
+        { label: 'Longitude', valueName: 'address.geo.lng', value: user.address.geo.lng }
     ]
 
     const userCompanyList = [
