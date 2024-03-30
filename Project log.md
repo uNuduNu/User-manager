@@ -6,7 +6,7 @@ Use MongoDB / Node.js / React
 create repo
 create vs code workspace
 
-## backend: Node.js
+## Backend: Node.js
 	setup backend
 		create package.json
 		create folder structure
@@ -53,7 +53,7 @@ create vs code workspace
 		add required fields (name, username, email) and validation (email must have @)
 	commit
 		
-## frontend: react
+## Frontend: React
 	setup frontend
 		create react app using Vite (has HMR which makes testing easier)
 		install axios (makes communication with backend easier)
