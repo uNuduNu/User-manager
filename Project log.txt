@@ -73,8 +73,18 @@ frontend: react
 	implemented adding and modifying users
 	commit
 	
+	improved userdetails
+		refactor detail line to own component, add headers, improve style
+		save button is only enabled after user makes changes
+	Move StatusMessage back to its own component, show only it when needed
+	Handle window width changes 
+	make deployment build
+	use frontend as backends main page
+	test locally 
+	commit
+	
+		
 	
 
 todo:	
-clean code (refactor react components?)
-make deployment build and host on render
+host on render
