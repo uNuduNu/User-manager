@@ -1,6 +1,6 @@
 # User manager practice project
 
-## Requirements:
+## Requirements
 ### Frontend:
 List users, adding new user and removing user.
 
