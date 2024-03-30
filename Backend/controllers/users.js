@@ -40,15 +40,7 @@ usersRouter.put('/:id', (request, response, next) => {
     }
 
     const user = request.body
-    /*    {
-      name: body.name,
-      username: body.username,
-      email: body.email,
-      address
 
-
-    }
- */
     User.findByIdAndUpdate(request.params.id, user, { new: true, runValidators: true, context: 'query' })
         .then(updatedUser => response.json(updatedUser))
         .catch(error => next(error))
