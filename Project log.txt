@@ -82,9 +82,5 @@ frontend: react
 	use frontend as backends main page
 	test locally 
 	commit
-	
-		
-	
-
-todo:	
-host on render
+---
+Hosted on render
