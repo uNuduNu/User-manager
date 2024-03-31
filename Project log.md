@@ -107,6 +107,10 @@ create vs code workspace
 	test manually that frontend still works
 	commit (render will automatically deploy)
 
+## Improve frontend
+	add 'required field' text to required fields
+	improve error messages for missing required fields and invalid fields
+
 ##tbd: add frontend tests
 
 

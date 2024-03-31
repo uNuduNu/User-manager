@@ -1,4 +1,4 @@
-const UserDetailLine = ({ label, valueName, value, handler }) => {
+const UserDetailLine = ({ label, valueName, value, handler, required }) => {
     const divStyle = {
         boxSizing: 'border-box',
         display: 'grid',
@@ -29,7 +29,7 @@ const UserDetailLine = ({ label, valueName, value, handler }) => {
     return (
         <div style={divStyle}>
             <p style={labelStyle}>{label}</p>
-            <input style={inputStyle} name={valueName} value={value} onChange={handler}/>
+            <input style={inputStyle} name={valueName} value={value} onChange={handler} placeholder={required ? 'Required field' : ''}/>
         </div>
     )
 }
@@ -89,9 +89,9 @@ const UserDetails = ({ wide, user, userChanged, backHandler, saveHandler, userCh
     }
 
     const userContactList = [
-        { label: 'Name', valueName: 'name', value: user.name },
-        { label: 'Username', valueName: 'username', value: user.username },
-        { label: 'Email', valueName: 'email', value: user.email },
+        { label: 'Name', valueName: 'name', value: user.name, required: true },
+        { label: 'Username', valueName: 'username', value: user.username, required: true },
+        { label: 'Email', valueName: 'email', value: user.email, required: true },
         { label: 'Phone', valueName: 'phone', value: user.phone },
         { label: 'Website', valueName: 'website', value: user.website }
     ]
@@ -114,15 +114,15 @@ const UserDetails = ({ wide, user, userChanged, backHandler, saveHandler, userCh
     return (
         <div style={wide ? frameStyle : undefined}>
             <div>
-                {userContactList.map(u => <UserDetailLine key={u.valueName} label={u.label} valueName={u.valueName} value={u.value} handler={userChangeHandler}/>)}
+                {userContactList.map(u => <UserDetailLine key={u.valueName} label={u.label} valueName={u.valueName} value={u.value} handler={userChangeHandler} required={u.required}/>)}
             </div>
             <h3 style={headerStyle}>Address</h3>
             <div>
-                {userAddressList.map(u => <UserDetailLine key={u.valueName} label={u.label} valueName={u.valueName} value={u.value} handler={userChangeHandler}/>)}
+                {userAddressList.map(u => <UserDetailLine key={u.valueName} label={u.label} valueName={u.valueName} value={u.value} handler={userChangeHandler} required={u.required}/>)}
             </div>
             <h3 style={headerStyle}>Company</h3>
             <div>
-                {userCompanyList.map(u => <UserDetailLine key={u.valueName} label={u.label} valueName={u.valueName} value={u.value} handler={userChangeHandler}/>)}
+                {userCompanyList.map(u => <UserDetailLine key={u.valueName} label={u.label} valueName={u.valueName} value={u.value} handler={userChangeHandler} required={u.required}/>)}
             </div>
             <UserDetailButtons userChanged={userChanged} backHandler={backHandler} saveHandler={saveHandler}/>
         </div>

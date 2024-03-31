@@ -10,7 +10,7 @@ function App() {
     const [messageStatus, setMessageStatus] = useState(true)
     const [users, setUsers] = useState([])
     const [nameFilter, setNameFilter] = useState('')
-    const [appView, setAppView] = useState(0)
+    const [detailView, setDetailView] = useState(false)
     const [currentUser, setCurrentUser] = useState(undefined)
     const [currentUserChanged, setCurrentUserChanged] = useState(false)
     const [wide, setWide] = useState(0)
@@ -71,35 +71,51 @@ function App() {
             email: '',
             phone: '',
             website: '',
-            address: {
-                street: '',
-                suite: '',
-                city: '',
-                zipcode: '',
-                geo: {
-                    lat: '',
-                    lng: ''
-                }
-            },
-            company: {
-                name: '',
-                catchPhrase: '',
-                bs: ''
-            }
+            address: { street: '', suite: '', city: '', zipcode: '', geo: { lat: '', lng: '' } },
+            company: { name: '', catchPhrase: '', bs: '' }
         }
         setCurrentUser(user)
-        setAppView(1)
+        setDetailView(true)
     }
 
     const modifyUserHandler = (name, id) => {
         setCurrentUser(users.filter(p => p.id === id)[0])
-        setAppView(2)
+        setDetailView(true)
     }
 
     const backHandler = () => {
         setCurrentUser(undefined)
         setCurrentUserChanged(false)
-        setAppView(0)
+        setDetailView(false)
+    }
+
+    const getUserSaveErrorMessage = (error) => {
+        console.log(error)
+        let errorMessage = error
+        if (error.includes('alidation failed')) {
+            if (error.includes('is required')) {
+                if (error.includes('username')) {
+                    errorMessage = 'username is required'
+                }
+                else if (error.includes('name')) {
+                    errorMessage = 'name is required'
+                }
+                else if (error.includes('email')) {
+                    errorMessage = 'email is required'
+                }
+            }
+            else if (error.includes('email')) {
+                errorMessage = 'email has no @'
+            }
+            else {
+                errorMessage = 'coordinates are invalid'
+            }
+        }
+        else if (error.includes('Cast to Number failed') && error.includes('address.geo.')) {
+            errorMessage = 'coordinates are invalid'
+        }
+
+        return errorMessage
     }
 
     const saveHandler = () => {
@@ -109,10 +125,10 @@ function App() {
                     setUsers(users.concat(user))
                     showMessage(`Added ${user.name}`, undefined)
                     setCurrentUser(undefined)
-                    setAppView(0)
+                    setDetailView(false)
                     setCurrentUserChanged(false)
                 })
-                .catch(error => showMessage(`Failed to add person: ${error.response.data.error}`, error))
+                .catch(error => showMessage(`Failed to add person: ${getUserSaveErrorMessage(error.response.data.error)}`, error.response.data.error))
         }
         else {
             userService.modifyUser(currentUser)
@@ -120,11 +136,11 @@ function App() {
                     setUsers(users.map(p => p.id !== user.id ? p : user))
                     showMessage(`Modified ${user.name}`, undefined)
                     setCurrentUser(undefined)
-                    setAppView(0)
+                    setDetailView(false)
                     setCurrentUserChanged(false)
                 })
                 .catch(error => {
-                    showMessage(`Failed to modify ${currentUser.name}: ${error.response.data.error}`, error)
+                    showMessage(`Failed to modify ${currentUser.name}: ${getUserSaveErrorMessage(error.response.data.error)}`, error.response.data.error)
                 })
         }
     }
@@ -162,20 +178,16 @@ function App() {
             }
         }
 
-        console.log(currentUserCopy)
-
         setCurrentUser(updateCurrentUser(currentUserCopy, nameClasses, value))
 
         setCurrentUserChanged(true)
     }
 
-    const mainStyle = {
-        margins:0,
-        padding: 0
-    }
+    const mainStyle = { margins:0, padding: 0 }
 
     const filteredUsers = nameFilter.length === 0 ? users : users.filter(user => user.name.toLowerCase().includes(nameFilter.toLowerCase()))
 
+    // Show status/error message?
     if (message !== undefined) {
         return (
             <div style={mainStyle}>
@@ -183,7 +195,9 @@ function App() {
             </div>
         )
     }
-    if (appView !== 0) {
+
+    // Show user detail view?
+    if (detailView === true) {
         return (
             <div style={mainStyle}>
                 <UserDetails wide={wide} user={currentUser} userChanged={currentUserChanged} backHandler={backHandler} saveHandler={saveHandler} userChangeHandler={userChangeHandler}/>
