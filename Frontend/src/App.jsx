@@ -54,7 +54,7 @@ function App() {
         }
         userService.removeUser(id)
             .then(() => {
-                setUsers(users.filter(p => p.id !== id))
+                setUsers(users.filter(u => u.id !== id))
                 showMessage(`Removed ${name}`, undefined)
             })
             .catch(error => showMessage(`Failed to remove user: ${id}`, error))
@@ -79,7 +79,7 @@ function App() {
     }
 
     const modifyUserHandler = (name, id) => {
-        setCurrentUser(users.filter(p => p.id === id)[0])
+        setCurrentUser(users.filter(u => u.id === id)[0])
         setDetailView(true)
     }
 
@@ -90,7 +90,6 @@ function App() {
     }
 
     const getUserSaveErrorMessage = (error) => {
-        console.log(error)
         let errorMessage = error
         if (error.includes('alidation failed')) {
             if (error.includes('is required')) {
@@ -128,19 +127,36 @@ function App() {
                     setDetailView(false)
                     setCurrentUserChanged(false)
                 })
-                .catch(error => showMessage(`Failed to add person: ${getUserSaveErrorMessage(error.response.data.error)}`, error.response.data.error))
+                .catch(error => {
+                    if (error.response.data.error === undefined) {
+                        showMessage('Failed to add person', error)
+                    }
+                    else {
+                        showMessage(`Failed to add person: ${getUserSaveErrorMessage(error.response.data.error)}`, error.response.data.error)
+                    }
+                })
         }
         else {
             userService.modifyUser(currentUser)
                 .then(user => {
-                    setUsers(users.map(p => p.id !== user.id ? p : user))
+                    setUsers(users.map(u => u.id !== user.id ? u : user))
                     showMessage(`Modified ${user.name}`, undefined)
                     setCurrentUser(undefined)
                     setDetailView(false)
                     setCurrentUserChanged(false)
                 })
                 .catch(error => {
-                    showMessage(`Failed to modify ${currentUser.name}: ${getUserSaveErrorMessage(error.response.data.error)}`, error.response.data.error)
+                    if (error.response.status === 404 || error.response.data.error === undefined) {
+                        // User has been removed
+                        showMessage('User has been removed from database', error)
+                        setUsers(users.filter(u => u.id !== currentUser.id))
+                        setCurrentUser(undefined)
+                        setDetailView(false)
+                        setCurrentUserChanged(false)
+                    }
+                    else {
+                        showMessage(`Failed to modify ${currentUser.name}: ${getUserSaveErrorMessage(error.response.data.error)}`, error.response.data.error)
+                    }
                 })
         }
     }

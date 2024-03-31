@@ -29,7 +29,7 @@ const UserDetailLine = ({ label, valueName, value, handler, required }) => {
     return (
         <div style={divStyle}>
             <p style={labelStyle}>{label}</p>
-            <input style={inputStyle} name={valueName} value={value} onChange={handler} placeholder={required ? 'Required field' : ''}/>
+            <input style={inputStyle} name={valueName} value={value ? value : ''} onChange={handler} placeholder={required ? 'Required field' : ''}/>
         </div>
     )
 }
