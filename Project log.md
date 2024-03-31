@@ -92,3 +92,21 @@ create vs code workspace
 
 ## Host
   Hosted on render
+
+## Add API tests to backend
+	install cross-env to allow using NODE_ENV for setting up test environment
+	install SuperTest test library
+	install express async error handler to eliminate the need to use try catch blocks with express awaits 
+	create APITests.test.js
+	create test_helper.js
+	run tests
+		make some changes to users.js as result of tests
+	refactor users.js to use await
+	run tests
+		-> OK
+	test manually that frontend still works
+	commit (render will automatically deploy)
+
+##tbd: add frontend tests
+
+
