@@ -12,7 +12,6 @@ Authentication is not required.
 MongoDB used for database, NodeJS for backend, React for frontend.
 
 ## REST API Endpoints
-Base url: https://user-manager-6rba.onrender.com/
 
 ### GET /api/users
 Retrieves all users.
