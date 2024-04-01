@@ -1,8 +1,8 @@
 # User manager practice project
 
 ## Requirements
-### Frontend:
-List users, adding new user and removing user.
+### Frontend :
+Functionality for listing / adding / modifying / deleting users.
 
 ### Backend:
 REST interface for retrieving users and adding / modifying / deleting user.
