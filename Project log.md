@@ -110,7 +110,6 @@ create vs code workspace
 ## Improve frontend
 	add 'required field' text to required fields
 	improve error messages for missing required fields and invalid fields
-
-##tbd: add frontend tests
+	add input validation using regexp
 
 

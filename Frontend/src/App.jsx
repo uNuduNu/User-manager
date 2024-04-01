@@ -178,6 +178,16 @@ function App() {
     const userChangeHandler = (event) => {
         const { name, value } = event.target
 
+        if (value !== undefined && value.length !== 0) {
+            // only allow numbers, letters dots, spaces, lines, underlines on input values
+            if (!/^[)(\s@\-_a-zA-Z0-9 .]+$/gm.test(value))
+                return
+
+            // Lon & lat must be numbers
+            if ((name === 'address.geo.lat' || name === 'address.geo.lng') && isNaN(value))
+                return
+        }
+
         const nameClasses = name.split('.')
 
         // Do not update react state directly
