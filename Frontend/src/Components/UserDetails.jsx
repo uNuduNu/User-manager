@@ -34,7 +34,7 @@ const UserDetailLine = ({ label, valueName, value, handler, required }) => {
     )
 }
 
-const UserDetailButtons = ({ userChanged, backHandler, saveHandler }) => {
+const UserDetailButtons = ({ userChanged, backHandler }) => {
 
     const divStyleButtons = {
         backgroundColor: '#4A4E58',
@@ -65,10 +65,10 @@ const UserDetailButtons = ({ userChanged, backHandler, saveHandler }) => {
 
     return (
         <div style={divStyleButtons}>
-            <button style={buttonStyle} onClick={() => backHandler()}>Back</button>
+            <button style={buttonStyle} onClick={() => backHandler()} type="button">Back</button>
             <div>
             </div>
-            <button disabled={!userChanged} style={userChanged ? buttonStyle : buttonStyleDisabled} onClick={() => saveHandler()}>Save</button>
+            <button disabled={!userChanged} style={userChanged ? buttonStyle : buttonStyleDisabled} type="submit">Save</button>
         </div>
     )
 }
@@ -113,18 +113,20 @@ const UserDetails = ({ wide, user, userChanged, backHandler, saveHandler, userCh
 
     return (
         <div style={wide ? frameStyle : undefined}>
-            <div>
-                {userContactList.map(u => <UserDetailLine key={u.valueName} label={u.label} valueName={u.valueName} value={u.value} handler={userChangeHandler} required={u.required}/>)}
-            </div>
-            <h3 style={headerStyle}>Address</h3>
-            <div>
-                {userAddressList.map(u => <UserDetailLine key={u.valueName} label={u.label} valueName={u.valueName} value={u.value} handler={userChangeHandler} required={u.required}/>)}
-            </div>
-            <h3 style={headerStyle}>Company</h3>
-            <div>
-                {userCompanyList.map(u => <UserDetailLine key={u.valueName} label={u.label} valueName={u.valueName} value={u.value} handler={userChangeHandler} required={u.required}/>)}
-            </div>
-            <UserDetailButtons userChanged={userChanged} backHandler={backHandler} saveHandler={saveHandler}/>
+            <form onSubmit={saveHandler}>
+                <div>
+                    {userContactList.map(u => <UserDetailLine key={u.valueName} label={u.label} valueName={u.valueName} value={u.value} handler={userChangeHandler} required={u.required}/>)}
+                </div>
+                <h3 style={headerStyle}>Address</h3>
+                <div>
+                    {userAddressList.map(u => <UserDetailLine key={u.valueName} label={u.label} valueName={u.valueName} value={u.value} handler={userChangeHandler} required={u.required}/>)}
+                </div>
+                <h3 style={headerStyle}>Company</h3>
+                <div>
+                    {userCompanyList.map(u => <UserDetailLine key={u.valueName} label={u.label} valueName={u.valueName} value={u.value} handler={userChangeHandler} required={u.required}/>)}
+                </div>
+                <UserDetailButtons userChanged={userChanged} backHandler={backHandler}/>
+            </form>
         </div>
     )
 }

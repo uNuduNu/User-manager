@@ -10,7 +10,7 @@ function App() {
     const [messageStatus, setMessageStatus] = useState(true)
     const [users, setUsers] = useState([])
     const [nameFilter, setNameFilter] = useState('')
-    const [detailView, setDetailView] = useState(false)
+    const [showDetailView, setshowDetailView] = useState(false)
     const [currentUser, setCurrentUser] = useState(undefined)
     const [currentUserChanged, setCurrentUserChanged] = useState(false)
     const [wide, setWide] = useState(0)
@@ -75,18 +75,18 @@ function App() {
             company: { name: '', catchPhrase: '', bs: '' }
         }
         setCurrentUser(user)
-        setDetailView(true)
+        setshowDetailView(true)
     }
 
     const modifyUserHandler = (name, id) => {
         setCurrentUser(users.filter(u => u.id === id)[0])
-        setDetailView(true)
+        setshowDetailView(true)
     }
 
     const backHandler = () => {
         setCurrentUser(undefined)
         setCurrentUserChanged(false)
-        setDetailView(false)
+        setshowDetailView(false)
     }
 
     const getUserSaveErrorMessage = (error) => {
@@ -117,14 +117,18 @@ function App() {
         return errorMessage
     }
 
-    const saveHandler = () => {
+    const saveHandler = (event) => {
+        event.preventDefault()
+
+        console.log('saving user')
+
         if (currentUser.id === undefined){
             userService.addUser(currentUser)
                 .then(user => {
                     setUsers(users.concat(user))
                     showMessage(`Added ${user.name}`, undefined)
                     setCurrentUser(undefined)
-                    setDetailView(false)
+                    setshowDetailView(false)
                     setCurrentUserChanged(false)
                 })
                 .catch(error => {
@@ -142,7 +146,7 @@ function App() {
                     setUsers(users.map(u => u.id !== user.id ? u : user))
                     showMessage(`Modified ${user.name}`, undefined)
                     setCurrentUser(undefined)
-                    setDetailView(false)
+                    setshowDetailView(false)
                     setCurrentUserChanged(false)
                 })
                 .catch(error => {
@@ -151,7 +155,7 @@ function App() {
                         showMessage('User has been removed from database', error)
                         setUsers(users.filter(u => u.id !== currentUser.id))
                         setCurrentUser(undefined)
-                        setDetailView(false)
+                        setshowDetailView(false)
                         setCurrentUserChanged(false)
                     }
                     else {
@@ -213,28 +217,32 @@ function App() {
 
     const filteredUsers = nameFilter.length === 0 ? users : users.filter(user => user.name.toLowerCase().includes(nameFilter.toLowerCase()))
 
-    // Show status/error message?
-    if (message !== undefined) {
+    const mainView = () => {
         return (
-            <div style={mainStyle}>
-                <StatusMessage text={message} success={messageStatus}/>
-            </div>
+            <>
+                <ControlBar nameInputValue={nameFilter} nameInputHandler={handleNameFilterChange} addUserHandler={addUserHandler}/>
+                <UserList wide={wide} users={filteredUsers} removeHandler={removeUser} modifyHandler={modifyUserHandler}/>
+            </>
         )
     }
 
-    // Show user detail view?
-    if (detailView === true) {
+    const detailView = () => {
         return (
-            <div style={mainStyle}>
-                <UserDetails wide={wide} user={currentUser} userChanged={currentUserChanged} backHandler={backHandler} saveHandler={saveHandler} userChangeHandler={userChangeHandler}/>
-            </div>
+            <UserDetails wide={wide} user={currentUser} userChanged={currentUserChanged} backHandler={backHandler} saveHandler={saveHandler} userChangeHandler={userChangeHandler}/>
+        )
+    }
+
+    const messageBox = () => {
+        return (
+            <StatusMessage text={message} success={messageStatus}/>
         )
     }
 
     return (
         <div style={mainStyle}>
-            <ControlBar nameInputValue={nameFilter} nameInputHandler={handleNameFilterChange} addUserHandler={addUserHandler}/>
-            <UserList wide={wide} users={filteredUsers} removeHandler={removeUser} modifyHandler={modifyUserHandler}/>
+            {message !== undefined && messageBox()}
+            {showDetailView === true && detailView()}
+            {showDetailView === false && mainView()}
         </div>
     )
 }
