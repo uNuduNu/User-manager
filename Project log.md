@@ -113,7 +113,7 @@ create vs code workspace
 	add input validation using regexp
 
 ## Refactor frontend
-	use form in user detailview (allows enter to be used for saving)
+	use form in detailview (allows enter to be used for saving)
  	clean the code used to display detailview / mainview / status 
   	don't hide mainview / detailview if status message is shown
  	
