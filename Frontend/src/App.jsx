@@ -17,8 +17,8 @@ function App() {
 
     useEffect(() => {
         userService.getAllUsers()
-            .then(users => {
-                setUsers(users)
+            .then(retrievedUsers => {
+                setUsers(retrievedUsers)
             })
             .catch(error => showMessage('Failed to get users from server', error))
     }, [])
