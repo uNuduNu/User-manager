@@ -57,7 +57,7 @@ function App() {
                 setUsers(users.filter(u => u.id !== id))
                 showMessage(`Removed ${name}`, undefined)
             })
-            .catch(error => showMessage(`Failed to remove user: ${id}`, error))
+            .catch(error => showMessage(`Failed to remove user: ${name}`, error))
     }
 
     const handleNameFilterChange = (event) => {
@@ -119,8 +119,6 @@ function App() {
 
     const saveHandler = (event) => {
         event.preventDefault()
-
-        console.log('saving user')
 
         if (currentUser.id === undefined){
             userService.addUser(currentUser)
